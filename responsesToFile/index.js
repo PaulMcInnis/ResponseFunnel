@@ -48,6 +48,7 @@ app.post("/write", (req, res) => {
       res.send("Error");
     } else {
       res.send("Success");
+      console.log(`\t...dumped ${filename}`);
     }
   });
 });
@@ -55,7 +56,5 @@ app.post("/write", (req, res) => {
 // Start the server and write some logs to let the user know
 app.listen(3000, () => {
   console.log("ResponsesToFile App Started.");
-  console.log(
-    `Data is being stored at location: ${dumpFolder}`
-  );
+  console.log(`Data is being stored at location: ${dumpFolder}`);
 });
