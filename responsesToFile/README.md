@@ -39,7 +39,7 @@ You can choose to write your own local server or edit the one provided below as 
 
 3. Navigate into the directory and install the dependencies. Use the following command: `npm i`
 
-4. Run the local server. Use the following command: `node index.js`
+4. Run the local server. Use the following command: `npm`
 
 5. Now, the responses for every request which is a part of this collection will be written to the `Responses` folder inside the project repo.
    You can modify the local server's code to change the file location.
