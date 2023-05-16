@@ -3,19 +3,20 @@
 // Imports
 fs = require("fs");
 shell = require("shelljs");
-const express = require("express");
+path = require("path");
+express = require("express");
+bodyParser = require("body-parser");
+
+// Init app
 const app = express();
-const bodyParser = require("body-parser");
 
 // TODO: move these constants into a .env
-const dumpFolder = path.join(process.cwd(), "./responses");
+const dumpFolder = path.join(process.cwd(), "responses");
 const defaultFileExtension = "json";
 const DEFAULT_MODE = "writeFile";
-const path = require("path");
 
 // Create the folder path in case it doesn't exist
-const full_path = path.join(process.cwd(), folderPath);
-shell.mkdir("-p", folderPath);
+shell.mkdir("-p", dumpFolder);
 
 // Change the limits according to your response size
 app.use(bodyParser.json({ limit: "50mb", extended: true }));
@@ -38,7 +39,7 @@ app.post("/write", (req, res) => {
       : req.body.uniqueIdentifier
     : false;
   const filename = `${req.body.requestName}${uniqueIdentifier || ""}`;
-  const filePath = `${path.join(folderPath, filename)}.${extension}`;
+  const filePath = `${path.join(dumpFolder, filename)}.${extension}`;
   const options = req.body.options || undefined;
 
   fs[fsMode](filePath, req.body.responseData, options, (err) => {
@@ -55,6 +56,6 @@ app.post("/write", (req, res) => {
 app.listen(3000, () => {
   console.log("ResponsesToFile App Started.");
   console.log(
-    `Data is being stored at location: ${path.join(process.cwd(), folderPath)}`
+    `Data is being stored at location: ${dumpFolder}`
   );
 });
