@@ -1,0 +1,7 @@
+node_modules
+responses
+*.zip
+.mypy_cache
+.vscode
+experiment*
+.DS_Store
