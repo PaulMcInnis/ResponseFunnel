@@ -84,8 +84,10 @@ if __name__ == "__main__":
                 break
 
             # Load both JSON
-            json_a = json.load(open(os.path.join(args.folder_a, json_file)))
-            json_b = json.load(open(os.path.join(args.folder_b, json_file)))
+            json_a_path = os.path.join(args.folder_a, json_file)
+            json_b_path = os.path.join(args.folder_b, json_file)
+            json_a = json.load(open(json_a_path))
+            json_b = json.load(open(json_b_path))
 
             # Calc diff
             ycm = YouchamaJsonDiffer(
@@ -107,7 +109,12 @@ if __name__ == "__main__":
                 dump_diff_folder = os.path.join(output_dir, json_file)
                 if diff_result:
                     url = dump_html_output(
-                        json_a, json_b, diff_result, dump_diff_folder
+                        left=json_a,
+                        right=json_b,
+                        diff_result=diff_result,
+                        output=dump_diff_folder,
+                        left_title=json_a_path,
+                        right_title=json_b_path,
                     )
                 raw_log_f.write(f"\n\n\tfile: '{json_file}'\n\traw_diff: {diff_txt}")
             # simple console out

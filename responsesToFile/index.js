@@ -11,7 +11,7 @@ bodyParser = require("body-parser");
 const app = express();
 
 // TODO: move these constants into a .env
-const dumpFolder = path.join(process.cwd(), "responses");
+const dumpFolder = path.join(process.cwd(), "responses"); // FIXME: make this a date / argument I can pass.
 const defaultFileExtension = "json";
 const DEFAULT_MODE = "writeFile";
 
